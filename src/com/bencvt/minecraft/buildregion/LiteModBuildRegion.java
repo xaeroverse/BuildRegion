@@ -1,8 +1,13 @@
-package net.minecraft.src;
+package com.bencvt.minecraft.buildregion;
+
+import java.io.File;
 
 import net.minecraft.client.Minecraft;
 
+import com.bencvt.minecraft.buildregion.ui.CustomKeyBinding;
 import com.bencvt.minecraft.buildregion.Controller;
+
+import com.mumfrey.liteloader.Tickable;
 
 /**
  * Front-end class, does the bare minimum of processing. Simply instantiates
@@ -10,7 +15,7 @@ import com.bencvt.minecraft.buildregion.Controller;
  * 
  * @author bencvt
  */
-public class mod_BuildRegion extends BaseMod {
+public class LiteModBuildRegion implements Tickable {
     private Controller controller;
 
     @Override
@@ -24,19 +29,27 @@ public class mod_BuildRegion extends BaseMod {
     }
 
     @Override
-    public void load() {
+    public void init(File configPath) {
         controller = new Controller(this);
-        ModLoader.setInGameHook(this, true, false); // include partial ticks
     }
 
     @Override
-    public boolean onTickInGame(float partialTickTime, Minecraft minecraft) {
-        controller.onRenderTick();
-        return true;
+    public void upgradeSettings(String version, File configPath, File oldConfigPath) {
+        //
     }
 
     @Override
-    public void keyboardEvent(KeyBinding key) {
-        controller.getInputManager().handleKeyboardEvent(key, false);
+    public void onTick(Minecraft minecraft, float partialTicks, boolean inGame, boolean clock) {
+        // include partial ticks
+        if (inGame) {
+            controller.onRenderTick();
+
+            // (in situ) replacement for keyboardEvent
+            for (CustomKeyBinding key : controller.getInputManager().ALL_KEYBINDS) {
+                if (key.isPressed()) {
+                    controller.getInputManager().handleKeyboardEvent(key, false);
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.bencvt.minecraft.buildregion.ui.window;
 
-import net.minecraft.src.GuiButton;
+import net.minecraft.client.gui.GuiButton;
 
 /**
  * Abstract GuiButton base class. Same as vanilla Minecraft's, plus various
@@ -28,10 +28,10 @@ public abstract class GuiControlBase extends GuiButton {
     }
 
     public final boolean isVisible() {
-        return drawButton;
+        return visible;
     }
     public final GuiControlBase setVisible(boolean visible) {
-        drawButton = visible;
+        this.visible = visible;
         return this;
     }
 

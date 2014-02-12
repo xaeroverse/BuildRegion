@@ -3,6 +3,7 @@ package com.bencvt.minecraft.buildregion.ui;
 import libshapedraw.primitive.Color;
 import libshapedraw.primitive.ReadonlyColor;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.ChatComponentText;
 
 /**
  * Handle sending text messages to the user.
@@ -27,7 +28,7 @@ public class MessageManager {
     }
 
     public void chat(String message) {
-        minecraft.ingameGUI.getChatGUI().printChatMessage(message);
+        minecraft.ingameGUI.getChatGUI().printChatMessage(new ChatComponentText(message));
     }
 
     public void render() {

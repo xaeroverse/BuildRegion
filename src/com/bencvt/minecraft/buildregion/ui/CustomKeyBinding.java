@@ -1,12 +1,13 @@
 package com.bencvt.minecraft.buildregion.ui;
 
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.KeyBinding;
-import net.minecraft.src.ModLoader;
+import net.minecraft.client.settings.KeyBinding;
 
 import org.lwjgl.input.Keyboard;
 
 import com.bencvt.minecraft.buildregion.lang.LocalizedString;
+
+import com.mumfrey.liteloader.LiteMod;
+import com.mumfrey.liteloader.core.LiteLoader;
 
 /**
  * Extends Minecraft's KeyBinding class to include various utility methods.
@@ -18,24 +19,24 @@ public class CustomKeyBinding extends KeyBinding {
     private boolean registered;
 
     public CustomKeyBinding(int defaultKeyCode, boolean allowRepeat, String bindingId, String description) {
-        super(bindingId, defaultKeyCode);
+        super(bindingId, defaultKeyCode, "buildregion.name");
         this.allowRepeat = allowRepeat;
         // TODO: what about localizations for other languages?
-        ModLoader.addLocalization(bindingId, description);
     }
 
-    public void register(BaseMod mod) {
+    public void register(LiteMod mod) {
         if (!registered) {
-            ModLoader.registerKey(mod, this, allowRepeat);
+            // allowRepeat?
+            LiteLoader.getInput().registerKeyBinding(this);
             registered = true;
         }
     }
 
     public String getKeyName() {
-        if (keyCode < 0) {
+        if (this.getKeyCode() < 0) {
             return "MOUSE";
         }
-        String keyName = Keyboard.getKeyName(keyCode);
+        String keyName = Keyboard.getKeyName(this.getKeyCode());
         if (keyName.equals("LBRACKET")) {
             return "[";
         } else if (keyName.equals("RBRACKET")) {

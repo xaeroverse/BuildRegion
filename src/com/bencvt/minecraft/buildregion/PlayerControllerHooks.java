@@ -1,10 +1,16 @@
-package net.minecraft.src;
+package com.bencvt.minecraft.buildregion;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.LinkedHashSet;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.PlayerControllerMP;
+import net.minecraft.util.Vec3;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+import net.minecraft.item.ItemStack;
 
 /**
  * Provide an API for player clicking on entities and blocks.
@@ -142,11 +148,11 @@ public class PlayerControllerHooks extends PlayerControllerMP {
     // This method should be deobfuscated as something like rightClickEntity or
     // interactWithEntity.
     @Override
-    public boolean func_78768_b(EntityPlayer player, Entity target) {
+    public boolean interactWithEntitySendPacket(EntityPlayer player, Entity target) {
         if (dispatchEntityClickEvent(false, target)) {
             return false;
         }
-        return super.func_78768_b(player, target);
+        return super.interactWithEntitySendPacket(player, target);
     }
 
     /** @return true if the click event should be cancelled */

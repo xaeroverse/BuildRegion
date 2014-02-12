@@ -5,14 +5,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockHalfSlab;
-import net.minecraft.src.Entity;
-import net.minecraft.src.ItemRecord;
-import net.minecraft.src.ItemSlab;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.PlayerControllerHooks;
-import net.minecraft.src.PlayerControllerHooks.PlayerControllerEventListener;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemRecord;
+import net.minecraft.item.ItemSlab;
+import net.minecraft.item.ItemStack;
+import net.minecraft.init.Blocks;
+
+import com.bencvt.minecraft.buildregion.PlayerControllerHooks;
+import com.bencvt.minecraft.buildregion.PlayerControllerHooks.PlayerControllerEventListener;
 
 import com.bencvt.minecraft.buildregion.region.Direction3D;
 
@@ -65,7 +67,7 @@ public class BlockClickHandler implements PlayerControllerEventListener {
             return false;
         }
         if (isLeftClick) {
-            if (isExcludedBlock(minecraft.theWorld.getBlockId(blockX, blockY, blockZ))) {
+            if (isExcludedBlock(minecraft.theWorld.getBlock(blockX, blockY, blockZ))) {
                 // Allow certain block types to be destroyed no matter what.
                 return false;
             }
@@ -100,18 +102,18 @@ public class BlockClickHandler implements PlayerControllerEventListener {
     }
 
     /**
-     * @return true if the specified block id is always allowed to be
+     * @return true if the specified block is always allowed to be
      *         placed/destroyed. Being able to light your work area with
      *         minimal fuss is an important quality-of-life issue in survival
      *         mode!
      */
-    private static boolean isExcludedBlock(int blockId) {
-        return blockId == Block.torchWood.blockID;
+    private static boolean isExcludedBlock(Block block) {
+        return block == Blocks.torch;
     }
 
     private boolean isPlayerHoldingExcludedBlock() {
         ItemStack held = minecraft.thePlayer.getCurrentEquippedItem();
-        return held == null ? false : isExcludedBlock(held.itemID);
+        return held == null ? false : isExcludedBlock(Block.getBlockFromItem(held.getItem()));
     }
 
     /**
@@ -122,16 +124,16 @@ public class BlockClickHandler implements PlayerControllerEventListener {
     private boolean isBuildReplaceBlock(int blockX, int blockY, int blockZ, int direction) {
         // Certain blocks that you can walk through are always treated as air
         // by Minecraft when placing another block on top of it.
-        int blockId = minecraft.theWorld.getBlockId(blockX, blockY, blockZ);
-        if (blockId == Block.snow.blockID ||
-                blockId == Block.vine.blockID ||
-                blockId == Block.tallGrass.blockID ||
-                blockId == Block.deadBush.blockID) {
+        Block block = minecraft.theWorld.getBlock(blockX, blockY, blockZ);
+        if (block == Blocks.snow ||
+                block == Blocks.vine ||
+                block == Blocks.tallgrass ||
+                block == Blocks.deadbush) {
             return true;
         }
 
         // Is the player is attempting to place a slab adjacent to another slab?
-        if (!(Block.blocksList[blockId] instanceof BlockHalfSlab)) {
+        if (!(block instanceof BlockSlab)) {
             return false;
         }
         ItemStack heldItemStack = minecraft.thePlayer.getCurrentEquippedItem();
@@ -141,7 +143,7 @@ public class BlockClickHandler implements PlayerControllerEventListener {
         ItemSlab heldSlab = (ItemSlab) heldItemStack.getItem();
 
         // Do the slab types match?
-        if (!slabBlockIdMatches(heldSlab, blockId)) {
+        if (!slabBlockMatches(heldSlab, block)) {
             return false;
         }
         int blockMetadata = minecraft.theWorld.getBlockMetadata(blockX, blockY, blockZ);
@@ -161,17 +163,17 @@ public class BlockClickHandler implements PlayerControllerEventListener {
         return true;
     }
 
-    private static boolean slabBlockIdMatches(ItemSlab slab, int blockId) {
+    private static boolean slabBlockMatches(ItemSlab slab, Block fullBlock) {
         try {
             for (Field field : ItemSlab.class.getDeclaredFields()) {
-                if (field.getType() == BlockHalfSlab.class) {
+                if (field.getType() == BlockSlab.class) {
                     field.setAccessible(true);
-                    BlockHalfSlab block = (BlockHalfSlab) field.get(slab);
+                    BlockSlab block = (BlockSlab) field.get(slab);
                     // isOpaqueCube returns true if the block is a double slab.
-                    if (!block.isOpaqueCube() && blockId == block.blockID) {
+                    if (!block.isOpaqueCube() && fullBlock == block) {
                         return true;
                     }
-                    // Else keep looking; there should be two BlockHalfSlab
+                    // Else keep looking; there should be two BlockSlab
                     // fields which are listed by getDeclaredFields in
                     // (theoretically) any order.
                 }
@@ -188,22 +190,22 @@ public class BlockClickHandler implements PlayerControllerEventListener {
      * adjacent to it.
      * <p>
      * Unfortunately there's no clean method or API for this, so we rely on a
-     * list of known block IDs and a few special cases.
+     * list of known blocks and a few special cases.
      * 
      * @return true if the block will definitely consume the right-click,
      *         false if it will probably not.
      */
     private boolean isRightClickConsumerBlock(int blockX, int blockY, int blockZ) {
-        final int blockId = minecraft.theWorld.getBlockId(blockX, blockY, blockZ);
+        final Block block = minecraft.theWorld.getBlock(blockX, blockY, blockZ);
 
-        // Check the list of IDs for blocks that override onBlockActivated() to
+        // Check the list of blocks that override onBlockActivated() to
         // always return true when the player is holding an ItemBlock.
-        if (blockIdsConsumingRightClick.contains(blockId)) {
+        if (blocksConsumingRightClick.contains(block)) {
             return true;
         }
 
         // Special case: jukeboxes
-        if (blockId == Block.jukebox.blockID) {
+        if (block == Blocks.jukebox) {
             if (minecraft.theWorld.getBlockMetadata(blockX, blockY, blockZ) != 0) {
                 // Jukebox isn't empty; right-clicking will pop the record out.
                 return true;
@@ -232,32 +234,32 @@ public class BlockClickHandler implements PlayerControllerEventListener {
         return false;
     }
 
-    private static final HashSet<Integer> blockIdsConsumingRightClick =
-            new HashSet<Integer>(Arrays.asList(new Integer[] {
-                    Block.anvil.blockID,
-                    Block.beacon.blockID,
-                    Block.bed.blockID,
-                    Block.brewingStand.blockID,
-                    Block.cake.blockID,
-                    Block.cauldron.blockID,
-                    Block.chest.blockID,
-                    Block.commandBlock.blockID,
-                    Block.dispenser.blockID,
-                    Block.doorSteel.blockID,
-                    Block.doorWood.blockID,
-                    Block.dragonEgg.blockID,
-                    Block.enchantmentTable.blockID,
-                    Block.enderChest.blockID,
-                    Block.fenceGate.blockID,
-                    Block.lever.blockID,
-                    Block.music.blockID, // a.k.a. note block
-                    Block.redstoneRepeaterActive.blockID,
-                    Block.redstoneRepeaterIdle.blockID,
-                    Block.stoneButton.blockID,
-                    Block.stoneOvenActive.blockID,
-                    Block.stoneOvenIdle.blockID,
-                    Block.trapdoor.blockID,
-                    Block.woodenButton.blockID,
-                    Block.workbench.blockID // a.k.a. crafting table
+    private static final HashSet<Block> blocksConsumingRightClick =
+            new HashSet<Block>(Arrays.asList(new Block[] {
+                    Blocks.anvil,
+                    Blocks.beacon,
+                    Blocks.bed,
+                    Blocks.brewing_stand,
+                    Blocks.cake,
+                    Blocks.cauldron,
+                    Blocks.chest,
+                    Blocks.command_block,
+                    Blocks.dispenser,
+                    Blocks.iron_door,
+                    Blocks.wooden_door,
+                    Blocks.dragon_egg,
+                    Blocks.enchanting_table,
+                    Blocks.ender_chest,
+                    Blocks.fence_gate,
+                    Blocks.lever,
+                    Blocks.noteblock,
+                    Blocks.powered_repeater,
+                    Blocks.unpowered_repeater,
+                    Blocks.stone_button,
+                    Blocks.lit_furnace,
+                    Blocks.furnace,
+                    Blocks.trapdoor,
+                    Blocks.wooden_button,
+                    Blocks.crafting_table
             }));
 }

@@ -1,9 +1,8 @@
 package com.bencvt.minecraft.buildregion.ui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.BaseMod;
-import net.minecraft.src.EnumOS;
-import net.minecraft.src.KeyBinding;
+import net.minecraft.util.Util;
+import net.minecraft.client.settings.KeyBinding;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -11,6 +10,8 @@ import org.lwjgl.input.Mouse;
 import com.bencvt.minecraft.buildregion.Controller;
 import com.bencvt.minecraft.buildregion.lang.LocalizedString;
 import com.bencvt.minecraft.buildregion.region.RelativeDirection3D;
+
+import com.mumfrey.liteloader.LiteMod;
 
 /**
  * Handle user input (keyboard/mouse events).
@@ -53,7 +54,7 @@ public class InputManager {
         KEYBIND_SHIFT_LEFT, KEYBIND_SHIFT_RIGHT
     };
 
-    public static boolean IS_MAC = Minecraft.getOs() == EnumOS.MACOS;
+    public static boolean IS_MAC = Util.getOSType() == Util.EnumOS.MACOS;
     // Control-left-click on Mac OS X is right-click, so use command instead.
     // The fancy command symbol is "\u2318" but it looks weird (undersized) in
     // Minecraft's default font.
@@ -69,7 +70,7 @@ public class InputManager {
     private final Minecraft minecraft;
     private long lastMouseEvent;
 
-    public InputManager(Controller controller, BaseMod mod) {
+    public InputManager(Controller controller, LiteMod mod) {
         this.controller = controller;
         minecraft = Minecraft.getMinecraft();
         for (CustomKeyBinding key : ALL_KEYBINDS) {

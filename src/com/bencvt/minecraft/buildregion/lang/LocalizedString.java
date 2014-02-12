@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.util.IllegalFormatException;
 import java.util.Properties;
 
-import net.minecraft.src.StringTranslate;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.StatCollector;
 
 /**
  * Internationalization (i18n): ideally, every string that the user can see
@@ -31,7 +32,7 @@ public abstract class LocalizedString {
             if (result.startsWith("$MC:")) {
                 // The property value is specifying a key from the Minecraft
                 // translations. Perform another lookup.
-                result = StringTranslate.getInstance().translateKeyFormat(result.substring(4), args);
+                result = StatCollector.translateToLocalFormatted(result.substring(4), args);
             } else if (args.length > 0) {
                 for (int i = 0; i < args.length; i++) {
                     if (args[i] == null) {
@@ -73,7 +74,7 @@ public abstract class LocalizedString {
      */
     private static String lookup(String key) {
         // Get the user's selected language from Minecraft.
-        String newLang = StringTranslate.getInstance().getCurrentLanguage();
+        String newLang = Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode(); 
         if (lang == null || !lang.equals(newLang)) {
             lang = newLang;
             // Ensure the default language is loaded.

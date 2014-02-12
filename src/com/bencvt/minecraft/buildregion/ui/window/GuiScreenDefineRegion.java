@@ -7,7 +7,7 @@ import libshapedraw.primitive.Axis;
 import libshapedraw.primitive.Color;
 import libshapedraw.primitive.ReadonlyColor;
 import libshapedraw.primitive.Vector3;
-import net.minecraft.src.GuiButton;
+import net.minecraft.client.gui.GuiButton;
 
 import com.bencvt.minecraft.buildregion.BuildMode;
 import com.bencvt.minecraft.buildregion.Controller;
@@ -212,7 +212,7 @@ public class GuiScreenDefineRegion extends GuiScreenBase {
 
                 windowWidth = Math.max(windowWidth, control.getWidth());
 
-                controlList.add(control);
+                buttonList.add(control);
             }
         }
         windowWidth += BORDER_THICKNESS*2 + PAD*2;
@@ -244,14 +244,14 @@ public class GuiScreenDefineRegion extends GuiScreenBase {
                 Math.max(buttonUndo.getWidth(), buttonDone.getWidth()));
         xPos = windowXPosition;
         yPos = windowYPosition + windowHeight; // no vertical padding
-        controlList.add(buttonHelp.setWidth(buttonWidth).setPositionXY(xPos, yPos));
+        buttonList.add(buttonHelp.setWidth(buttonWidth).setPositionXY(xPos, yPos));
         xPos += buttonHelp.getWidth() + 4;
         // TODO: enable options button once GUI is built
-        //controlList.add(buttonOptions.setWidth(buttonWidth).setPositionXY(xPos, yPos));
+        //buttonList.add(buttonOptions.setWidth(buttonWidth).setPositionXY(xPos, yPos));
         xPos = windowXPosition + windowWidth - buttonDone.setWidth(buttonWidth).getWidth();
-        controlList.add(buttonDone.setPositionXY(xPos, yPos));
+        buttonList.add(buttonDone.setPositionXY(xPos, yPos));
         xPos -= buttonUndo.setWidth(buttonWidth).getWidth() + 4;
-        controlList.add(buttonUndo.setPositionXY(xPos, yPos));
+        buttonList.add(buttonUndo.setPositionXY(xPos, yPos));
 
         // Hide the chat window which would otherwise clutter up the screen.
         ChatHider.hide();
@@ -381,7 +381,7 @@ public class GuiScreenDefineRegion extends GuiScreenBase {
         super.keyTyped(keyChar, keyCode);
         // Allow BuildRegion keybinds to work even while in the GUI.
         for (CustomKeyBinding key : controller.getInputManager().ALL_KEYBINDS) {
-            if (key.keyCode == keyCode) {
+            if (key.getKeyCode() == keyCode) {
                 if (controller.getInputManager().handleKeyboardEvent(key, true)) {
                     onRegionChangedByMouseOrKeybind();
                 }

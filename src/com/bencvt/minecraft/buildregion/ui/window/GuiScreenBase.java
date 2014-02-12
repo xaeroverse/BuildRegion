@@ -1,9 +1,10 @@
 package com.bencvt.minecraft.buildregion.ui.window;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.GuiScreen;
-import net.minecraft.src.Tessellator;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -148,7 +149,7 @@ public abstract class GuiScreenBase extends GuiScreen {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_FOG);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture("/gui/background.png"));
+        mc.getTextureManager().bindTexture(optionsBackground);   // GL11.glBindTexture
         final double txSize = 32.0;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         tess.startDrawingQuads();

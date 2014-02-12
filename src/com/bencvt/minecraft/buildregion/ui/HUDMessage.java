@@ -3,7 +3,7 @@ package com.bencvt.minecraft.buildregion.ui;
 import libshapedraw.primitive.Color;
 import libshapedraw.primitive.ReadonlyColor;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.ScaledResolution;
+import net.minecraft.client.gui.ScaledResolution;
 
 /**
  * An alternate to spamming the chat window: flash text on the center of the

@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import libshapedraw.primitive.Color;
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiSlot;
-import net.minecraft.src.Tessellator;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiSlot;
+import net.minecraft.client.renderer.Tessellator;
 
 import com.bencvt.minecraft.buildregion.Controller;
 
@@ -68,7 +68,7 @@ public class GuiScreenHelp extends GuiScreenBase {
         getLines(controller);
 
         buttonDone.setWidth(200).setPositionXY((width - buttonDone.getWidth())/2, height - 30);
-        controlList.add(buttonDone);
+        buttonList.add(buttonDone);
 
         contents = new GuiSlot(mc, width, height, 16, height - 28, fontRenderer.FONT_HEIGHT + 1) {
             private boolean openedUrl;
@@ -79,7 +79,7 @@ public class GuiScreenHelp extends GuiScreenBase {
             }
 
             @Override
-            protected void elementClicked(int slotNum, boolean doubleClick) {
+            protected void elementClicked(int slotNum, boolean doubleClick, int mouseX, int mouseY) {
                 if (slotNum == urlLineNum && !openedUrl) {
                     try {
                         Desktop.getDesktop().browse(WEBSITE_URL);
@@ -101,7 +101,7 @@ public class GuiScreenHelp extends GuiScreenBase {
             }
 
             @Override
-            protected void drawSlot(int slotNum, int xPos, int yPos, int slotContentHeight, Tessellator tess) {
+            protected void drawSlot(int slotNum, int xPos, int yPos, int slotContentHeight, Tessellator tess, int mouseX, int mouseY) {
                 getFontRenderer().drawString(lines.get(slotNum), MARGIN_X, yPos, TEXT_ARGB);
                 if (rightColumnLines.containsKey(slotNum)) {
                     getFontRenderer().drawString(rightColumnLines.get(slotNum),

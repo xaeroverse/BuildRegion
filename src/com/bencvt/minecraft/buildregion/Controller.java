@@ -10,8 +10,9 @@ import libshapedraw.event.LSDRespawnEvent;
 import libshapedraw.primitive.ReadonlyVector3;
 import libshapedraw.primitive.Vector3;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.PlayerControllerHooks;
-import net.minecraft.src.mod_BuildRegion;
+
+import com.bencvt.minecraft.buildregion.PlayerControllerHooks;
+import com.bencvt.minecraft.buildregion.LiteModBuildRegion;
 
 import com.bencvt.minecraft.buildregion.lang.LocalizedString;
 import com.bencvt.minecraft.buildregion.region.Direction3D;
@@ -30,7 +31,7 @@ import com.bencvt.minecraft.buildregion.ui.world.ShapeManager;
  */
 public class Controller implements LSDEventListener {
     public static final String MOD_VERSION = "2.0.2-SNAPSHOT";
-    public static final String MINECRAFT_VERSION = "1.4.5";
+    public static final String MINECRAFT_VERSION = "1.7.2_03";
     public static final String MIN_LIBSHAPEDRAW_VERSION = "1.3";
 
     private static Controller instance;
@@ -45,7 +46,7 @@ public class Controller implements LSDEventListener {
     private RegionBase curRegion;
     private RegionBase prevRegion; // will never be null
 
-    public Controller(mod_BuildRegion mod) {
+    public Controller(LiteModBuildRegion mod) {
         if (instance != null) {
             throw new RuntimeException("multiple instances of singleton");
         }
@@ -56,7 +57,7 @@ public class Controller implements LSDEventListener {
         messageManager = new MessageManager();
         shapeManager = new ShapeManager(this);
         modTitle = mod.getName() + " v" + MOD_VERSION;
-        modDirectory = new File(Minecraft.getMinecraftDir(), "mods" + File.separator + mod.getName());
+        modDirectory = new File(minecraft.mcDataDir, "mods" + File.separator + mod.getName());
         buildMode = new BuildModeValue(BuildMode.INSIDE);
         cmdReset();
 

@@ -1,7 +1,7 @@
 package com.bencvt.minecraft.buildregion.ui.window;
 
-import net.minecraft.src.GuiButton;
-import net.minecraft.src.GuiControls;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiControls;
 
 /**
  * TODO: user-specified options. Possible options:
@@ -25,10 +25,10 @@ public class GuiScreenOptions extends GuiScreenBase {
     @Override
     public void initGui() {
         buttonControls.setWidth(150).setPositionXY(width/2 - 152, height - 30);
-        controlList.add(buttonControls);
+        buttonList.add(buttonControls);
 
         buttonDone.setWidth(150).setPositionXY(width/2 + 2, height - 30);
-        controlList.add(buttonDone);
+        buttonList.add(buttonDone);
     }
 
     @Override

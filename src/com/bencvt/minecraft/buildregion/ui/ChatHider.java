@@ -1,6 +1,7 @@
 package com.bencvt.minecraft.buildregion.ui;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer.EnumChatVisibility;
 
 /**
  * Allow GUI screens to hide the chat window while the screen is open.
@@ -20,7 +21,7 @@ import net.minecraft.client.Minecraft;
  */
 public class ChatHider extends Thread {
     private static ChatHider thread;
-    private static int origChatVisibility;
+    private static EnumChatVisibility origChatVisibility;
     private boolean killed;
 
     private ChatHider() {
@@ -54,11 +55,11 @@ public class ChatHider extends Thread {
             return;
         }
         origChatVisibility = Minecraft.getMinecraft().gameSettings.chatVisibility;
-        if (origChatVisibility == 2) {
+        if (origChatVisibility == EnumChatVisibility.HIDDEN) {
             // already hidden by user preference
             return;
         }
-        Minecraft.getMinecraft().gameSettings.chatVisibility = 2;
+        Minecraft.getMinecraft().gameSettings.chatVisibility = EnumChatVisibility.HIDDEN;
         thread = new ChatHider();
         thread.start();
     }
