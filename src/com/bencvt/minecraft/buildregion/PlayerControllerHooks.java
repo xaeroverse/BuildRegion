@@ -74,7 +74,7 @@ public class PlayerControllerHooks extends PlayerControllerMP {
         public boolean onEntityClick(boolean isLeftClick, Entity entity, boolean cancelled);
     }
 
-    private static LinkedHashSet<PlayerControllerEventListener> eventListeners = new LinkedHashSet();
+    private static LinkedHashSet<PlayerControllerEventListener> eventListeners = new LinkedHashSet<PlayerControllerEventListener>();
 
     public static boolean register(PlayerControllerEventListener listener) {
         return eventListeners.add(listener);

@@ -124,7 +124,7 @@ public abstract class RegionBase {
     public static String i18n(String key, Object ... args) {
         return LocalizedString.translate(key, args);
     }
-    public static String i18n(Enum e) {
+    public static String i18n(Enum<?> e) {
         return LocalizedString.translate(e);
     }
 }

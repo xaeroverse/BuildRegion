@@ -380,6 +380,7 @@ public class GuiScreenDefineRegion extends GuiScreenBase {
     protected void keyTyped(char keyChar, int keyCode) {
         super.keyTyped(keyChar, keyCode);
         // Allow BuildRegion keybinds to work even while in the GUI.
+        // ALL_KEYBINDS is static
         for (CustomKeyBinding key : controller.getInputManager().ALL_KEYBINDS) {
             if (key.getKeyCode() == keyCode) {
                 if (controller.getInputManager().handleKeyboardEvent(key, true)) {

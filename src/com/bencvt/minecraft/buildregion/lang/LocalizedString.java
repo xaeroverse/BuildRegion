@@ -55,7 +55,7 @@ public abstract class LocalizedString {
      * Attempt to translate an enum value.
      * @return a non-null string, translated if possible.
      */
-    public static String translate(Enum e) {
+    public static String translate(Enum<?> e) {
         if (e == null) {
             return "null";
         }

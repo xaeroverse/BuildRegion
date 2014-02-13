@@ -45,6 +45,7 @@ public class LiteModBuildRegion implements Tickable {
             controller.onRenderTick();
 
             // (in situ) replacement for keyboardEvent
+            // ALL_KEYBINDS is static
             for (CustomKeyBinding key : controller.getInputManager().ALL_KEYBINDS) {
                 if (key.isPressed()) {
                     controller.getInputManager().handleKeyboardEvent(key, false);

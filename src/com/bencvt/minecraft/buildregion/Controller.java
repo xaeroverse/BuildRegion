@@ -155,6 +155,7 @@ public class Controller implements LSDEventListener {
 
     public boolean cmdMode(BuildMode newMode) {
         buildMode.setValue(newMode);
+        // KEYBIND_MODE is static
         messageManager.info(i18n("hud.mode", newMode,
                 inputManager.KEYBIND_MODE.getKeyName(true)));
         return true;

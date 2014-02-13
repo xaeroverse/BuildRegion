@@ -14,7 +14,7 @@ import com.bencvt.minecraft.buildregion.lang.LocalizedString;
  * 
  * @author bencvt
  */
-public class GuiSelectEnum<T extends Enum> extends GuiLabeledControl {
+public class GuiSelectEnum<T extends Enum<?>> extends GuiLabeledControl {
     public static final int OPTION_SPACING = 2;
     public static final int PAD_LEFT = 2;
     public static final int PAD_RIGHT = 2;
