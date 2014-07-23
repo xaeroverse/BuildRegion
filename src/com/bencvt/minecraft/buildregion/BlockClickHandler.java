@@ -148,7 +148,7 @@ public class BlockClickHandler implements PlayerControllerEventListener {
         }
         int blockMetadata = minecraft.theWorld.getBlockMetadata(blockX, blockY, blockZ);
         int slabSubtype = blockMetadata & 7;
-        if (slabSubtype != heldItemStack.getItemDamage()) {
+        if (slabSubtype != heldItemStack.getMetadata()) {
             return false;
         }
 

@@ -38,11 +38,11 @@ public abstract class GuiScreenBase extends GuiScreen {
         this.parentScreen = parentScreen;
         allowMouseLook = true;
         mc = Minecraft.getMinecraft();
-        fontRenderer = mc.fontRenderer;
+        fontRendererObj = mc.fontRendererObj;
     }
 
     public FontRenderer getFontRenderer() {
-        return fontRenderer;
+        return fontRendererObj;
     }
 
     public void open() {

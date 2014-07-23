@@ -94,7 +94,7 @@ public class GuiScreenDefineRegion extends GuiScreenBase {
         }
 
         // Create all row controls.
-        rowSpacer = new GuiEmptyRow(this, fontRenderer.FONT_HEIGHT + 3);
+        rowSpacer = new GuiEmptyRow(this, fontRendererObj.FONT_HEIGHT + 3);
         inputBuildMode = new GuiSelectEnum<BuildMode>(this, i18n("label.buildmode"), BuildMode.values(), null);
         for (BuildMode mode : BuildMode.values()) {
             inputBuildMode.setOptionColor(mode, mode.colorVisible);

@@ -54,7 +54,7 @@ public class InputManager {
         KEYBIND_SHIFT_LEFT, KEYBIND_SHIFT_RIGHT
     };
 
-    public static boolean IS_MAC = Util.getOSType() == Util.EnumOS.MACOS;
+    public static boolean IS_MAC = Util.getOSType() == Util.EnumOS.OSX;
     // Control-left-click on Mac OS X is right-click, so use command instead.
     // The fancy command symbol is "\u2318" but it looks weird (undersized) in
     // Minecraft's default font.

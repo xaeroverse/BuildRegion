@@ -38,7 +38,7 @@ public class GuiScreenHelp extends GuiScreenBase {
 
     private void getLines(Controller controller) {
         lines.clear();
-        lines.addAll(fontRenderer.listFormattedStringToWidth(i18n("help.about"), width - MARGIN_X*2));
+        lines.addAll(fontRendererObj.listFormattedStringToWidth(i18n("help.about"), width - MARGIN_X*2));
         lines.add("");
         lines.add(i18n("help.author") + " bencvt");
         urlLineNum = lines.size();
@@ -46,7 +46,7 @@ public class GuiScreenHelp extends GuiScreenBase {
         lines.add(i18n("help.usage"));
         lines.addAll(Arrays.asList(controller.getInputManager().getUsage("  ").split("\n")));
         lines.add("");
-        lines.addAll(fontRenderer.listFormattedStringToWidth(i18n("help.gui"), width - MARGIN_X*2));
+        lines.addAll(fontRendererObj.listFormattedStringToWidth(i18n("help.gui"), width - MARGIN_X*2));
         lines.add("");
 
         rightColumnLines.clear();
@@ -56,7 +56,7 @@ public class GuiScreenHelp extends GuiScreenBase {
             int t = line.indexOf('\t');
             if (t >= 0) {
                 String leftColumn = line.substring(0, t);
-                leftColumnWidth = Math.max(leftColumnWidth, fontRenderer.getStringWidth(leftColumn));
+                leftColumnWidth = Math.max(leftColumnWidth, fontRendererObj.getStringWidth(leftColumn));
                 lines.set(i, leftColumn);
                 rightColumnLines.put(i, line.substring(t + 1));
             }
@@ -70,7 +70,7 @@ public class GuiScreenHelp extends GuiScreenBase {
         buttonDone.setWidth(200).setPositionXY((width - buttonDone.getWidth())/2, height - 30);
         buttonList.add(buttonDone);
 
-        contents = new GuiSlot(mc, width, height, 16, height - 28, fontRenderer.FONT_HEIGHT + 1) {
+        contents = new GuiSlot(mc, width, height, 16, height - 28, fontRendererObj.FONT_HEIGHT + 1) {
             private boolean openedUrl;
 
             @Override
@@ -135,7 +135,7 @@ public class GuiScreenHelp extends GuiScreenBase {
     public void drawScreen(int xMouse, int yMouse, float partialTick) {
         drawDefaultBackground();
         contents.drawScreen(xMouse, yMouse, partialTick);
-        drawCenteredString(fontRenderer, controller.getModTitle(), width / 2, 4, TEXT_ARGB);
+        drawCenteredString(fontRendererObj, controller.getModTitle(), width / 2, 4, TEXT_ARGB);
         super.drawScreen(xMouse, yMouse, partialTick);
     }
 

@@ -83,7 +83,7 @@ public abstract class GuiLabeledControl extends GuiControlBase {
         }
 
         // Draw label text.
-        minecraft.fontRenderer.drawString(
+        minecraft.fontRendererObj.drawString(
                 getText(),
                 xPosition + labelWidth - parent.getFontRenderer().getStringWidth(getText()),
                 yPosition + getLabelYOffset(),

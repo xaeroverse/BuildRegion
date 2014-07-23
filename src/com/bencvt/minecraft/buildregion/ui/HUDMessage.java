@@ -55,16 +55,16 @@ public class HUDMessage {
         }
         int argb = color.getARGB();
         ScaledResolution res = new ScaledResolution(
-                minecraft.gameSettings,
+                minecraft,
                 minecraft.displayWidth,
                 minecraft.displayHeight);
-        int yStart = (res.getScaledHeight() - minecraft.fontRenderer.FONT_HEIGHT) * 1 / 16;
+        int yStart = (res.getScaledHeight() - minecraft.fontRendererObj.FONT_HEIGHT) * 1 / 16;
         for (int i = 0; i < lines.length; i++) {
-            int x = (res.getScaledWidth() - minecraft.fontRenderer.getStringWidth(lines[i])) / 2;
-            int y = yStart + i*minecraft.fontRenderer.FONT_HEIGHT;
+            int x = (res.getScaledWidth() - minecraft.fontRendererObj.getStringWidth(lines[i])) / 2;
+            int y = yStart + i*minecraft.fontRendererObj.FONT_HEIGHT;
             // TODO: Minecraft's font renderer has some weird alpha channel
             // logic... may need to implement custom version for smooth fading.
-            minecraft.fontRenderer.drawStringWithShadow(lines[i], x, y, argb);
+            minecraft.fontRendererObj.drawStringWithShadow(lines[i], x, y, argb);
         }
     }
 }
