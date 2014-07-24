@@ -18,13 +18,12 @@ public class CustomKeyBinding extends KeyBinding {
     private final boolean allowRepeat;
     private boolean registered;
 
-    public CustomKeyBinding(int defaultKeyCode, boolean allowRepeat, String bindingId, String description) {
-        super(bindingId, defaultKeyCode, "buildregion.name");
+    public CustomKeyBinding(int defaultKeyCode, boolean allowRepeat, String bindingId) {
+        super(bindingId, defaultKeyCode, "key.categories.buildregion");
         this.allowRepeat = allowRepeat;
-        // TODO: what about localizations for other languages?
     }
 
-    public void register(LiteMod mod) {
+    public void register() {
         if (!registered) {
             // allowRepeat?
             LiteLoader.getInput().registerKeyBinding(this);

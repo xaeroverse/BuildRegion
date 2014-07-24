@@ -21,32 +21,25 @@ import com.mumfrey.liteloader.LiteMod;
 public class InputManager {
     public static final CustomKeyBinding KEYBIND_MODE = new CustomKeyBinding(
             Keyboard.KEY_B, false,
-            "buildregion.mode",
-            "BuildRegion mode");
+            "buildregion.mode");
     public static final CustomKeyBinding KEYBIND_SHIFT_BACK = new CustomKeyBinding(
             Keyboard.KEY_LBRACKET, false,
-            "buildregion.shift.back",
-            "BuildRegion shift");
+            "buildregion.shift.back");
     public static final CustomKeyBinding KEYBIND_SHIFT_FWD = new CustomKeyBinding(
             Keyboard.KEY_RBRACKET, false,
-            "buildregion.shift.fwd",
-            "BuildRegion shift fwd");
+            "buildregion.shift.fwd");
     public static final CustomKeyBinding KEYBIND_SHIFT_UP = new CustomKeyBinding(
             Keyboard.KEY_UP, false,
-            "buildregion.shift.up",
-            "BuildRegion shift up");
+            "buildregion.shift.up");
     public static final CustomKeyBinding KEYBIND_SHIFT_DOWN = new CustomKeyBinding(
             Keyboard.KEY_DOWN, false,
-            "buildregion.shift.down",
-            "BuildRegion shift down");
+            "buildregion.shift.down");
     public static final CustomKeyBinding KEYBIND_SHIFT_LEFT = new CustomKeyBinding(
             Keyboard.KEY_LEFT, false,
-            "buildregion.shift.left",
-            "BuildRegion shift left");
+            "buildregion.shift.left");
     public static final CustomKeyBinding KEYBIND_SHIFT_RIGHT = new CustomKeyBinding(
             Keyboard.KEY_RIGHT, false,
-            "buildregion.shift.right",
-            "BuildRegion shift right");
+            "buildregion.shift.right");
     public static final CustomKeyBinding[] ALL_KEYBINDS = {
         KEYBIND_MODE,
         KEYBIND_SHIFT_BACK, KEYBIND_SHIFT_FWD,
@@ -70,11 +63,11 @@ public class InputManager {
     private final Minecraft minecraft;
     private long lastMouseEvent;
 
-    public InputManager(Controller controller, LiteMod mod) {
+    public InputManager(Controller controller) {
         this.controller = controller;
         minecraft = Minecraft.getMinecraft();
         for (CustomKeyBinding key : ALL_KEYBINDS) {
-            key.register(mod);
+            key.register();
         }
     }
 

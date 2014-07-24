@@ -53,7 +53,7 @@ public class Controller implements LSDEventListener {
         instance = this;
 
         minecraft = Minecraft.getMinecraft();
-        inputManager = new InputManager(this, mod);
+        inputManager = new InputManager(this);
         messageManager = new MessageManager();
         shapeManager = new ShapeManager(this);
         modTitle = mod.getName() + " v" + MOD_VERSION;

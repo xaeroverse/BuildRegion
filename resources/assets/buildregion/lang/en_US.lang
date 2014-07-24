@@ -28,6 +28,15 @@ input.rightclick=right-click
 input.middleclick=middle-click
 input.movementkey=movement key
 
+key.categories.buildregion=BuildRegion
+buildregion.mode=Change Build Mode
+buildregion.shift.back=Shift Back
+buildregion.shift.fwd=Shift Forward
+buildregion.shift.up=Shift Up
+buildregion.shift.down=Shift Down
+buildregion.shift.left=Shift Left
+buildregion.shift.right=Shift Right
+
 usage.set=set region
 usage.clear=clear region
 usage.move.backfwd=move region back/forward
