@@ -260,6 +260,11 @@ public class BlockClickHandler implements PlayerControllerEventListener {
                     Blocks.furnace,
                     Blocks.trapdoor,
                     Blocks.wooden_button,
-                    Blocks.crafting_table
+                    Blocks.crafting_table,
+                    Blocks.trapped_chest,
+                    Blocks.unpowered_comparator,
+                    Blocks.powered_comparator,
+                    Blocks.hopper,
+                    Blocks.dropper
             }));
 }
