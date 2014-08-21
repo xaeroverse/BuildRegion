@@ -11,7 +11,7 @@ import com.mumfrey.liteloader.Tickable;
 
 /**
  * Front-end class, does the bare minimum of processing. Simply instantiates
- * the Controller and passes ModLoader events to it.
+ * the Controller and passes LiteLoader events to it.
  * 
  * @author bencvt
  */

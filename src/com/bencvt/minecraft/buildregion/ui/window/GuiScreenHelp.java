@@ -115,7 +115,7 @@ public class GuiScreenHelp extends GuiScreenBase {
              * method, the original background remains -- in our case, a
              * nice darkened view of the game world.
              * <p>
-             * This method will never be called if we're using ModLoader
+             * This method will never be called if we're using LiteLoader
              * instead, as vanilla Minecraft hard-codes slot backgrounds. So
              * our help screen will have an interesting background when using
              * Forge, and a plain black/dirt background when not.
