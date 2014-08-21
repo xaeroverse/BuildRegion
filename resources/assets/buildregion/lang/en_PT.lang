@@ -19,9 +19,18 @@ input.rightclick=right-click
 input.rightclick=middle-click
 input.movementkey=movement key
 
+key.categories.buildregion=BuildRegion
+buildregion.mode=Change Build Mode
+buildregion.shift.back=Sail windward
+buildregion.shift.fwd=Sail leeward
+buildregion.shift.up=Raise
+buildregion.shift.down=Sink
+buildregion.shift.left=Shove to port
+buildregion.shift.right=Shove to starboard
+
 usage.set=christen region
 usage.clear=scuttle region
-usage.move.backfwd=sail region leeward/windward
+usage.move.backfwd=sail region windward/leeward
 usage.move.updown=raise/sink region
 usage.move.leftright=shove region to port/starboard
 usage.resize=resize region
