@@ -25,7 +25,8 @@ public class UpdateCheck {
 
     public UpdateCheck(final String curVersion, File modDirectory) {
         // TODO: make this part of options.txt instead
-        if (new File(modDirectory, "noupdatecheck.txt").exists()) {
+        // disable update check for now
+        if (true || new File(modDirectory, "noupdatecheck.txt").exists()) {
             return;
         }
         new Thread("BuildRegion update check") {
