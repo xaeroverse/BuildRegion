@@ -16,10 +16,10 @@ import java.net.URLConnection;
  * @author bencvt
  */
 public class UpdateCheck {
-    public static final String MAIN_URL = "http://www.minecraftforum.net/topic/1514724-";
-    public static final String SHORT_URL = "http://bit.ly/BuildRegion";
-    public static final String SOURCE_URL = "https://github.com/bencvt/BuildRegion";
-    public static final String UPDATE_URL_PREFIX = "http://update.bencvt.com/u/BuildRegion?v=";
+    public static final String MAIN_URL = "@buildregion.url.main@";
+    public static final String SHORT_URL = "@buildregion.url.short@";
+    public static final String SOURCE_URL = "@buildregion.url.source@";
+    public static final String UPDATE_URL_PREFIX = "@buildregion.url.update@";
 
     private String result;
 

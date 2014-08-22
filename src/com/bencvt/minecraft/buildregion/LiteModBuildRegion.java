@@ -20,7 +20,7 @@ public class LiteModBuildRegion implements Tickable {
 
     @Override
     public String getName() {
-        return "BuildRegion";
+        return "@buildregion.name@";
     }
 
     @Override

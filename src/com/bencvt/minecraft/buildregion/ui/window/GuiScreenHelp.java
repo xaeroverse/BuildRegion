@@ -21,7 +21,7 @@ import com.bencvt.minecraft.buildregion.Controller;
 public class GuiScreenHelp extends GuiScreenBase {
     public static final int MARGIN_X = 48;
     public static final int TEXT_ARGB = Color.WHITE.getARGB();
-    public static final URI WEBSITE_URL = URI.create("http://bit.ly/BuildRegion");
+    public static final URI WEBSITE_URL = URI.create("@buildregion.url.short@");
 
     private final GuiStandardButton buttonDone = new GuiStandardButton(this, i18n("button.done"));
     private final ArrayList<String> lines = new ArrayList<String>();
@@ -40,7 +40,7 @@ public class GuiScreenHelp extends GuiScreenBase {
         lines.clear();
         lines.addAll(fontRendererObj.listFormattedStringToWidth(i18n("help.about"), width - MARGIN_X*2));
         lines.add("");
-        lines.add(i18n("help.author") + " bencvt");
+        lines.add(i18n("help.author") + " @buildregion.authors@");
         urlLineNum = lines.size();
         lines.add(i18n("help.url") + " \u00a79\u00a7n" + WEBSITE_URL);
         lines.add(i18n("help.usage"));

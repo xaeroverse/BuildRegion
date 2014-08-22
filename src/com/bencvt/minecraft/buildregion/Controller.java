@@ -30,9 +30,9 @@ import com.bencvt.minecraft.buildregion.ui.world.ShapeManager;
  * @author bencvt
  */
 public class Controller implements LSDEventListener {
-    public static final String MOD_VERSION = "2.0.2-SNAPSHOT";
-    public static final String MINECRAFT_VERSION = "1.7.10";
-    public static final String MIN_LIBSHAPEDRAW_VERSION = "1.3";
+    public static final String MOD_VERSION = "@buildregion.version@";
+    public static final String MINECRAFT_VERSION = "@minecraft.version@";
+    public static final String MIN_LIBSHAPEDRAW_VERSION = "@libshapedraw.minversion@";
 
     private static Controller instance;
     private final Minecraft minecraft;
