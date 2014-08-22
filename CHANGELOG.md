@@ -2,6 +2,10 @@
 - added cylinder and sphere region types
 - added options file and GUI screen
 
+## 2.0.3
+- updated for Minecraft 1.7.10
+- depend on LiteLoader instead of Forge/FML
+
 ## 2.0.2
 - updated for Minecraft 1.4.5 and LibShapeDraw 1.3
 
