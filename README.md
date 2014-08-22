@@ -9,43 +9,19 @@ BuildRegion is *not* an auto-build tool. It will only prevent you from
 misclicking; it will not click for you. It's all client-side, meaning you can
 use this on multi-player without the server having to run a special plugin.
 
-See the [official minecraftforums.net thread](http://www.minecraftforum.net/topic/1514724-buildregion/)
+See the [current minecraftforums.net thread](http://www.minecraftforum.net/forums/t/2189861)
 for screenshots and a demo video.
 
 ## Installation
 
 First of all, make sure that
-[LibShapeDraw](http://www.minecraftforum.net/topic/1458931-libshapedraw/) is
+[LibShapeDraw](http://www.minecraftforum.net/forums/t/2188255) is
 installed as it is a base requirement. You'll also need
-[ModLoader](http://www.minecraftforum.net/topic/75440-modloader/) or
-[Forge](http://www.minecraftforge.net/forum/); BuildRegion is compatible with
-either.
+[LiteLoader](http://www.minecraftforum.net/topic/1868280-).
 
-Next, download the zip and do one of the following, whichever you prefer:
-
- +  **Use a launcher utility to add the zip (recommended).** There are many
-    launchers out there, e.g.
-    [Magic Launcher](http://www.minecraftforum.net/topic/939149-magiclauncher/).
-
-OR
-
- +  **Move the zip file to the `mods` subdirectory.** This subdirectory can
-    be found in your
-    [Minecraft directory](http://www.minecraftwiki.net/wiki/.minecraft).
-
-OR
-
- +  **Manually patch the contents of the zip file into your `minecraft.jar`.**
-    Old-school modding still works. Be sure to remove the `META-INF` folder.
-
-## Compatibility
-
-BuildRegion does not modify *any* vanilla classes directly and therefore should
-be compatible with virtually every mod that works with ModLoader or Forge. If
-you find an incompatible mod please post to
-[the minecraftforums thread](http://www.minecraftforum.net/topic/1514724-buildregion/)
-or [open an issue on github](https://github.com/bencvt/BuildRegion/issues)
-and we'll try to sort it out.
+Next, download the litemod and move it to the `mods` subdirectory.  This
+subdirectory can be found in your
+[Minecraft directory](http://www.minecraftwiki.net/wiki/.minecraft).
 
 ## Usage
 
@@ -76,7 +52,11 @@ Note: if you're using a Mac, use `command (⌘)` instead of `control`.
 
 ## More info
 
-BuildRegion is open source! Visit the official project page at
-[github.com/bencvt/BuildRegion](https://github.com/bencvt/BuildRegion).
+BuildRegion is open source! Visit the current project page at
+[github.com/xaeroverse/BuildRegion](https://github.com/xaeroverse/BuildRegion).
 In addition to the source code, the project documentation also includes the
 change log and a list of planned features.
+
+The original project's repo by bencvt is located at [github.com/bencvt/BuildRegion](https://github.com/bencvt/BuildRegion), and the [original forum thread here](http://www.minecraftforum.net/topic/1514724-buildregion/).
+
+The version history is maintained in [CHANGELOG.md](https://github.com/xaeroverse/BuildRegion/blob/master/CHANGELOG.md).
